@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.EletroEletronicos;
 import model.Radio;
 
 public class RadioDAO {
@@ -52,5 +53,28 @@ public class RadioDAO {
 		statement.setInt(1, codigo);
 		 
 		return statement.executeUpdate() > 0;
+	}
+	
+	public List<EletroEletronicos> listaRadio() throws SQLException {
+		List<EletroEletronicos> lRadios = new ArrayList<>();
+
+		String sql = "select * from RADIO";
+		try (PreparedStatement stmt = con.prepareStatement(sql)) {
+			stmt.execute();
+			try (ResultSet rs = stmt.getResultSet()) {
+				while (rs.next()) {
+					int codigo = rs.getInt("RAD_CODIGO");
+					int volume = rs.getInt("RAD_VOLUME");
+					String marca = rs.getString("RAD_MARCA");
+					
+					Radio radio = new Radio(codigo, volume, marca);
+					
+					lRadios.add(radio);
+				}
+			}
+		}
+
+		return lRadios;
+
 	}
 }

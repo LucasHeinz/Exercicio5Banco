@@ -5,6 +5,12 @@ public abstract class EletroEletronicos {
 	private Integer codigo;
 	private int volume;
 	private String marca;
+	
+	public EletroEletronicos(Integer codigo, int volume, String marca) {
+		this.codigo = codigo;
+		this.volume = volume;
+		this.marca = marca;
+	}
 
 	public Integer getCodigo() {
 		return codigo;
